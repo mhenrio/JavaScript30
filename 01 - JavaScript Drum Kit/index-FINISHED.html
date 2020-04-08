@@ -58,24 +58,30 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
+
+ // Remove transition
+
   function removeTransition(e) {
-    if (e.propertyName !== 'transform') return;
-    e.target.classList.remove('playing');
+    if (e.propertyName !== 'transform') return; // Skip it if its not la property transform
+    e.target.classList.remove('playing'); // remove CSS after 2s transitions (specified in CSS)
   }
 
+// Adding sound according to the data-key associated. I link the key with the sound and the sound with the key.
   function playSound(e) {
     const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
     const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
-    if (!audio) return;
+    if (!audio) return; // stop the function from running all together
 
-    key.classList.add('playing');
-    audio.currentTime = 0;
+
+    key.classList.add('playing'); // Adding CSS .playing
+    audio.currentTime = 0; // Return to zero
     audio.play();
   }
 
+// For each key, I add removeTransition function so the transition can stop.
   const keys = Array.from(document.querySelectorAll('.key'));
   keys.forEach(key => key.addEventListener('transitionend', removeTransition));
-  window.addEventListener('keydown', playSound);
+  window.addEventListener('keydown', playSound); // Adding an event when I press ot the key, play sound.
 </script>
 
 

@@ -20,7 +20,8 @@
 
   <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
 
-  <style>
+
+  <style> /* I define my variables which are in the input name of my labels */
     :root {
       --base: #ffc600;
       --spacing: 10px;
@@ -33,6 +34,7 @@
       filter: blur(var(--blur));
     }
 
+    /* Change color of the h1 depending of the color of the img background */
     .hl {
       color: var(--base);
     }
@@ -63,8 +65,8 @@
     const inputs = document.querySelectorAll('.controls input');
 
     function handleUpdate() {
-      const suffix = this.dataset.sizing || '';
-      document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+      const suffix = this.dataset.sizing || ''; /* link the results to a suffix (px) that i can find in my labels */
+      document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix); /* Selecting all my document and set properties (blur, ...) link/ set to a value and suffix */
     }
 
     inputs.forEach(input => input.addEventListener('change', handleUpdate));

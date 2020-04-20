@@ -8,19 +8,19 @@
 <canvas id="draw" width="800" height="800"></canvas>
 <script>
 const canvas = document.querySelector('#draw');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
+const ctx = canvas.getContext('2d'); // ctx = document where I will draw;
+canvas.width = window.innerWidth; // permet d'avoir le dessin sur toute la largeur et la hauteur de l'écran;
 canvas.height = window.innerHeight;
-ctx.strokeStyle = '#BADA55';
-ctx.lineJoin = 'round';
-ctx.lineCap = 'round';
+ctx.strokeStyle = '#BADA55'; // couleur par laquelle le trait commence;
+ctx.lineJoin = 'round'; // forme de la fin du trait qui est rond;
+ctx.lineCap = 'round'; // les traits se lit en rondeur;
 ctx.lineWidth = 100;
 // ctx.globalCompositeOperation = 'multiply';
 
-let isDrawing = false;
-let lastX = 0;
-let lastY = 0;
-let hue = 0;
+let isDrawing = false; // le trait de dessine quand j'ai le dois sur ma souris;
+let lastX = 0; // Endroit ou je peux commencer a dessiner;
+let lastY = 0; // Endroit ou je peux finir de dessiner;
+let hue = 0; // couleur commence a la couleur zero;
 let direction = true;
 
 function draw(e) {
@@ -35,13 +35,13 @@ function draw(e) {
   ctx.stroke();
   [lastX, lastY] = [e.offsetX, e.offsetY];
 
-  hue++;
+  hue++; // j'incremente une nouvelle couleur a chaque fois que je bouge. on utilise la palette de couleur hsl;
   if (hue >= 360) {
     hue = 0;
-  }
+  } // si le trait arrive a la dernière couleur de la palette alors on recommance à zero, couleur du début;
   if (ctx.lineWidth >= 100 || ctx.lineWidth <= 1) {
     direction = !direction;
-  }
+  } // on augmente la taille du trait au fur et a mesure et arrive a 100 on diminu jusqu'a 1;
 
   if(direction) {
     ctx.lineWidth++;
@@ -49,7 +49,7 @@ function draw(e) {
     ctx.lineWidth--;
   }
 
-}
+} // from smaller to bigger from bigger to smaller;
 
 canvas.addEventListener('mousedown', (e) => {
   isDrawing = true;
